@@ -8,16 +8,16 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int movieId;
 
-    @Column
+    @Column(length = 60)
     public String title;
 
-    @Column
+    @Column(length = 30)
     public String genre;
 
     @Column
     public int releaseYear;
 
-    @Column
+    @Column(length = 60)
     public String director;
 
     @Column
