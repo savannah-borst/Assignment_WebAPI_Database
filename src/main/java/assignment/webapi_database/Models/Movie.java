@@ -6,23 +6,23 @@ import javax.persistence.*;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int movieId;
+    public int movieId;
 
     @Column
-    private String title;
+    public String title;
 
     @Column
-    private String genre;
+    public String genre;
 
     @Column
-    private int releaseYear;
+    public int releaseYear;
 
     @Column
-    private String director;
+    public String director;
 
     @Column
-    private String picture;
+    public String picture;
 
     @Column
-    private String trailer;
+    public String trailer;
 }
