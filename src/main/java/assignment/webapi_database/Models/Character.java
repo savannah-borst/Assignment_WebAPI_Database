@@ -3,6 +3,9 @@ package assignment.webapi_database.Models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Character {
@@ -23,24 +26,20 @@ public class Character {
     @Column
     public String picture;
 
-//    @JsonGetter("owner")
-//    public String getOwner()
-//    {
-//        if(owner != null)
-//        {
-//            return "/person/" + owner.id;
-//        }
-//        else
-//        {
-//            return null;
-//        }
-//    }
-//
-//    @ManyToOne()
-//    @JoinTable(
-//            name = "owner",
-//            joinColumns = {@JoinColumn(name = "pet_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "owner_id")}
-//    )
+    @JsonGetter("movies")
+    public List<String> get_movie_list(){
+        return movies.stream()
+                .map(movieItem -> {
+                    return "/movie/" + movieItem.movieId;
+                }).collect(Collectors.toList());
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "movie_characters",
+            joinColumns = {@JoinColumn(name = "character_id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
+    )
+    public List<Movie> movies = new ArrayList<>();
 
 }
