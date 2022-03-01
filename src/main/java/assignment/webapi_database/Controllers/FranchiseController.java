@@ -44,13 +44,27 @@ public class FranchiseController {
 
     //add movie
 //    @PutMapping("franchise/{id}/movie/{movie_id]")
-//    public Franchise addMovieToFranchise(@PathVariable Integer id, Integer movie_id) {
+//    public ResponseEntity<Franchise> addMovieToFranchise(@PathVariable Integer id, Integer movie_id) {
 //        Franchise franchise = getFranchise(id);
 //        if (movieRepository.existsById(movie_id)) {
 //            franchise.movies.add(movieRepository.getById(movie_id));
 //        }
-//        franchiseRepository.save(franchise);
+//        franchise = franchiseRepository.save(franchise);
 //
-//        return franchise;
+//        HttpStatus resp = HttpStatus.OK;
+//        return new ResponseEntity<>(franchise, resp);
 //    }
+
+    @DeleteMapping("franchise/{id}")
+    public ResponseEntity<Franchise> deleteFranchise(@PathVariable Integer id) {
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(id)) {
+            franchiseRepository.deleteById(id);
+            status = HttpStatus.OK;
+        } else {
+            status = HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<>(status);
+    }
 }
