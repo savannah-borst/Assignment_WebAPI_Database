@@ -1,9 +1,13 @@
 package assignment.webapi_database.Controllers;
 
 import assignment.webapi_database.Models.Franchise;
-import assignment.webapi_database.Repositories.FranchiseRepository;
+import assignment.webapi_database.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -11,6 +15,15 @@ public class FranchiseController {
 
     @Autowired
     private FranchiseRepository franchiseRepository;
+    private MovieRepository movieRepository;
+
+    // read all
+    @GetMapping("/franchise/all")
+    public ResponseEntity<List<Franchise>> getAllFranchises() {
+        List<Franchise> franchises = franchiseRepository.findAll();
+        HttpStatus resp = HttpStatus.OK;
+        return new ResponseEntity<>(franchises, resp);
+    }
 
     //create
     @PostMapping("/franchise")
@@ -28,4 +41,16 @@ public class FranchiseController {
         }
         return franchise;
     }
+
+    //add movie
+//    @PutMapping("franchise/{id}/movie/{movie_id]")
+//    public Franchise addMovieToFranchise(@PathVariable Integer id, Integer movie_id) {
+//        Franchise franchise = getFranchise(id);
+//        if (movieRepository.existsById(movie_id)) {
+//            franchise.movies.add(movieRepository.getById(movie_id));
+//        }
+//        franchiseRepository.save(franchise);
+//
+//        return franchise;
+//    }
 }
