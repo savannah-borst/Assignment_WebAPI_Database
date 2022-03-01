@@ -1,9 +1,14 @@
 package assignment.webapi_database.Models;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
+
 import javax.persistence.*;
+import java.util.Set;
+
 
 @Entity
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int movieId;
@@ -15,7 +20,7 @@ public class Movie {
     public String genre;
 
     @Column
-    public Integer releaseYear;
+    public int releaseYear;
 
     @Column(length = 60)
     public String director;
@@ -26,28 +31,15 @@ public class Movie {
     @Column
     public String trailer;
 
-    @JsonGetter("franchise")
-    public String getFranchise()
-    {
-        if(franchise != null)
-        {
-            return "/api/franchise/" + franchise.franchiseId;
-        }
-        else
-        {
-            return null;
-        }
-    }
+//    @JsonGetter("pets")
+//    public List<String> get_pets_list(){
+//        return pets.stream()
+//                .map(pet -> {
+//                    return "/pet/" +pet.id;
+//                }).collect(Collectors.toList());
+//    }
+//
+//    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+//    List<Pet> pets = new ArrayList<>();
 
-    @ManyToOne()
-    @JoinTable(
-            name = "franchise_movies",
-            joinColumns = {@JoinColumn(name = "movie_id")},
-            inverseJoinColumns = {@JoinColumn(name = "franchise_id")}
-    )
-    public Franchise franchise;
-
-    public int getMovieId() {
-        return movieId;
-    }
 }
