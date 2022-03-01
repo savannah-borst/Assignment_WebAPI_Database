@@ -1,5 +1,7 @@
 package assignment.webapi_database.Models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,8 +12,6 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int movieId;
-
-//    private Set<Character> movieCharacters = new HashSet<>(); this is a test merge
 
     @Column(length = 60)
     public String title;
@@ -30,4 +30,16 @@ public class Movie {
 
     @Column
     public String trailer;
+
+//    @JsonGetter("pets")
+//    public List<String> get_pets_list(){
+//        return pets.stream()
+//                .map(pet -> {
+//                    return "/pet/" +pet.id;
+//                }).collect(Collectors.toList());
+//    }
+//
+//    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+//    List<Pet> pets = new ArrayList<>();
+
 }
