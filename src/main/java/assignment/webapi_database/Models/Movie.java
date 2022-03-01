@@ -31,7 +31,7 @@ public class Movie {
     {
         if(franchise != null)
         {
-            return "/franchise/" + franchise.franchiseId;
+            return "/api/franchise/" + franchise.franchiseId;
         }
         else
         {
