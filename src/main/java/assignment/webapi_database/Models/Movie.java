@@ -15,7 +15,7 @@ public class Movie {
     public String genre;
 
     @Column
-    public int releaseYear;
+    public Integer releaseYear;
 
     @Column(length = 60)
     public String director;
@@ -31,7 +31,7 @@ public class Movie {
     {
         if(franchise != null)
         {
-            return "/franchise/" + franchise.franchiseId;
+            return "/api/franchise/" + franchise.franchiseId;
         }
         else
         {
@@ -39,11 +39,15 @@ public class Movie {
         }
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinTable(
             name = "franchise_movies",
             joinColumns = {@JoinColumn(name = "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "franchise_id")}
     )
     public Franchise franchise;
+
+    public int getMovieId() {
+        return movieId;
+    }
 }
