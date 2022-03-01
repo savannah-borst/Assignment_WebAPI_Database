@@ -1,6 +1,6 @@
 package assignment.webapi_database.Controllers;
 
-import assignment.webapi_database.Models.Franchise;
+import assignment.webapi_database.Models.*;
 import assignment.webapi_database.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,9 +42,18 @@ public class FranchiseController {
         return franchise;
     }
 
-    //add movie
+    // read all movies in the franchise
+    @GetMapping("franchise/{id}/movies")
+    public ResponseEntity<List<String>> getMoviesInFranchise(@PathVariable Integer id) {
+        Franchise franchise = getFranchise(id);
+        List<String> movies = franchise.get_movie_list();
+        HttpStatus resp = HttpStatus.OK;
+        return new ResponseEntity<>(movies, resp);
+    }
+
+    //add movie to a franchise
 //    @PutMapping("franchise/{id}/movie/{movie_id]")
-//    public ResponseEntity<Franchise> addMovieToFranchise(@PathVariable Integer id, Integer movie_id) {
+//    public ResponseEntity<Franchise> addMovieToFranchise(@RequestBody Movie movie, @PathVariable Integer id, Integer movie_id) {
 //        Franchise franchise = getFranchise(id);
 //        if (movieRepository.existsById(movie_id)) {
 //            franchise.movies.add(movieRepository.getById(movie_id));
@@ -55,7 +64,7 @@ public class FranchiseController {
 //        return new ResponseEntity<>(franchise, resp);
 //    }
 
-    @DeleteMapping("franchise/{id}")
+    @DeleteMapping("franchise/{id}/delete")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable Integer id) {
         HttpStatus status;
 
