@@ -18,7 +18,7 @@ public class Movie {
     public String genre;
 
     @Column
-    public int releaseYear;
+    public Integer releaseYear;
 
     @Column(length = 60)
     public String director;
