@@ -7,8 +7,8 @@ INSERT INTO movie  (director, genre, picture, release_year, title, trailer) VALU
 INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('George Lucas', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg', 1999, 'Star Wars: Episode I - The Phantom Menace', 'https://www.youtube.com/watch?v=bD7bpG-zDJQ');
 INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('George Lucas', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/3/32/Star_Wars_-_Episode_II_Attack_of_the_Clones_%28movie_poster%29.jpg', 2002, 'Star Wars: Episode II – Attack of the Clones', 'https://www.youtube.com/watch?v=gYbW1F_c9eM');
 INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('George Lucas', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg', 2005, 'Star Wars: Episode III – Revenge of the Sith', 'https://www.youtube.com/watch?v=5UnjrG_N8hU');
-INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('J. J. Abrams', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/a/a2/Star_Wars_The_Force_Awakens_Theatrical_Poster.jpg', 2015, 'Star Wars: The Force Awakens', 'https://www.youtube.com/watch?v=sGbxmsDFVnE');
-INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('Rian Johnson', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/7/7f/Star_Wars_The_Last_Jedi.jpg', 2017, 'Star Wars: The Last Jedi', 'https://www.youtube.com/watch?v=Q0CbN8sfihY');
+INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('J. J. Abrams', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/a/a2/Star_Wars_The_Force_Awakens_Theatrical_Poster.jpg', 2015, 'Star Wars: Episode VII: The Force Awakens', 'https://www.youtube.com/watch?v=sGbxmsDFVnE');
+INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('Rian Johnson', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/7/7f/Star_Wars_The_Last_Jedi.jpg', 2017, 'Star Wars: Episode VIII: The Last Jedi', 'https://www.youtube.com/watch?v=Q0CbN8sfihY');
 INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('J. J. Abrams', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/a/af/Star_Wars_The_Rise_of_Skywalker_poster.jpg', 2019, 'Star Wars: Episode IX – The Rise of Skywalker', 'https://www.youtube.com/watch?v=8Qn_spdM5Zg');
 INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('Gareth Edwards', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/d/d4/Rogue_One%2C_A_Star_Wars_Story_poster.png', 2016, 'Rogue One: A Star Wars Story', 'https://www.youtube.com/watch?v=frdj1zb9sMY');
 INSERT INTO movie (director, genre, picture, release_year, title, trailer) VALUES ('Ron Howard', 'Adventure', 'https://upload.wikimedia.org/wikipedia/en/5/54/Solo_A_Star_Wars_Story_poster.jpg', 2018, 'Solo: A Star Wars Story', 'https://www.youtube.com/watch?v=jPEYpryMp2s');
@@ -23,4 +23,14 @@ INSERT INTO character (alias, full_name, gender, picture) VALUES ('The Mighty Ch
 INSERT INTO character (full_name, gender, picture) VALUES ('C-3PO', 'Male', 'https://static.wikia.nocookie.net/starwars/images/f/f0/See_Threepio.jpg/revision/latest?cb=20070304205205&path-prefix=nl');
 INSERT INTO character (full_name, gender, picture) VALUES ('Rey Skywalker', 'Female', 'https://static.wikia.nocookie.net/starwars/images/c/c0/Rey.png/revision/latest?cb=20151223095426&path-prefix=nl');
 INSERT INTO character (full_name, gender, picture) VALUES ('Yoda', 'Male', 'https://static.wikia.nocookie.net/starwars/images/6/6c/Yoda_TESB.jpg/revision/latest?cb=20070117221553&path-prefix=nl');
-
+INSERT INTO franchise_movies SELECT 1,1;
+INSERT INTO franchise_movies SELECT 1,2;
+INSERT INTO franchise_movies SELECT 1,3;
+INSERT INTO franchise_movies SELECT 1,4;
+INSERT INTO franchise_movies SELECT 1,5;
+INSERT INTO franchise_movies SELECT 1,6;
+INSERT INTO franchise_movies SELECT 1,7;
+INSERT INTO franchise_movies SELECT 1,8;
+INSERT INTO franchise_movies SELECT 1,9;
+INSERT INTO franchise_movies SELECT 1,10;
+INSERT INTO franchise_movies SELECT 1,11;
