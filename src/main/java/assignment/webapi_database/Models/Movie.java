@@ -19,7 +19,7 @@ public class Movie {
     @Column(length = 30, nullable = false)
     public String genre;
 
-    @Column(nullable = false)
+    @Column(length = 4, nullable = false)
     public Integer releaseYear;
 
     @Column(length = 60, nullable = false)
