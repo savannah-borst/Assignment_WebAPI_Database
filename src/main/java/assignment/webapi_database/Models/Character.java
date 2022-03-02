@@ -43,4 +43,28 @@ public class Character {
     )
     public List<Movie> movies = new ArrayList<>();
 
+    //Getters
+    public int getCharacterId() {
+        return characterId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
 }

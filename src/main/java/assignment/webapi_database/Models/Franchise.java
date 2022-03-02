@@ -15,20 +15,37 @@ public class Franchise {
     public int franchiseId;
 
     @Column(length = 60, nullable = false)
-    public String Name;
+    public String name;
 
     @Column
-    public String Description;
+    public String description;
 
     //Relationships
     @JsonGetter("movies")
     public List<String> get_movie_list(){
         return movies.stream()
                 .map(movieItem -> {
-                    return "/movie/" + movieItem.movieId + " " + movieItem.title;
+                    return "/api/movie/" + movieItem.movieId + " " + movieItem.title;
                 }).collect(Collectors.toList());
     }
 
     @OneToMany(mappedBy = "franchise", fetch = FetchType.LAZY)
     public List<Movie> movies = new ArrayList<>();
+
+    //getters
+    public int getFranchiseId() {
+        return franchiseId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
 }
