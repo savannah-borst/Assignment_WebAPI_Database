@@ -25,6 +25,7 @@ public class Character {
 
     @Column
     public String picture;
+    public boolean title;
 
     //Relationships
     @JsonGetter("movies")
