@@ -31,7 +31,7 @@ public class Character {
     public List<String> get_movie_list(){
         return movies.stream()
                 .map(movieItem -> {
-                    return "/api/movie/" + movieItem.movieId + movieItem.title;
+                    return "/api/movie/" + movieItem.movieId + " " + movieItem.title;
                 }).collect(Collectors.toList());
     }
 
