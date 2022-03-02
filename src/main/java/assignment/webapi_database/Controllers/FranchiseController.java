@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/franchise")
@@ -15,6 +16,7 @@ public class FranchiseController {
 
     @Autowired
     private FranchiseRepository franchiseRepository;
+    @Autowired
     private MovieRepository movieRepository;
 
     // read all
@@ -51,18 +53,35 @@ public class FranchiseController {
         return new ResponseEntity<>(movies, resp);
     }
 
-    //add movie to a franchise
-//    @PutMapping("franchise/{id}/movie/{movie_id]")
-//    public ResponseEntity<Franchise> addMovieToFranchise(@RequestBody Movie movie, @PathVariable Integer id, Integer movie_id) {
-//        Franchise franchise = getFranchise(id);
-//        if (movieRepository.existsById(movie_id)) {
-//            franchise.movies.add(movieRepository.getById(movie_id));
-//        }
-//        franchise = franchiseRepository.save(franchise);
-//
-//        HttpStatus resp = HttpStatus.OK;
-//        return new ResponseEntity<>(franchise, resp);
-//    }
+    //update movie to a franchise
+    @PutMapping("/{id}/update/movie")
+    public ResponseEntity<List<Movie>> updateMovieToFranchise(@RequestBody int[] movieId, @PathVariable Integer id) {
+        Franchise franchise = franchiseRepository.getById(id);
+        List<Movie> movies = franchise.getMovies();
+        boolean contains;
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(id)) {
+
+            for (int i: movieId) {
+                contains = movies.stream().anyMatch(movieItem -> movieItem.getMovieId() == i);
+                if (!contains) {
+                    if (movieRepository.existsById(i)) {
+                        Optional<Movie> movieItem = movieRepository.findById(i);
+                        movies.add(movieItem.orElse(null));
+                    }
+                }
+            }
+
+            status = HttpStatus.OK;
+
+            return new ResponseEntity<>(movies, status);
+
+        } else {
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(movies, status);
+        }
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable Integer id) {
