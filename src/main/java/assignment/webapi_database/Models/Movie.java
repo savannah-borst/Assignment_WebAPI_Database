@@ -57,7 +57,7 @@ public class Movie {
     public List<String> get_character_list(){
         return characters.stream()
                 .map(characterItem -> {
-                    return "/api/character/" + characterItem.characterId + " " + characterItem.fullName;
+                    return "/api/character/" + characterItem.getCharacterId() + " " + characterItem.getFullName();
                 }).collect(Collectors.toList());
     }
 
