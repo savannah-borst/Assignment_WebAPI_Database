@@ -37,7 +37,7 @@ public class Movie {
     {
         if(franchise != null)
         {
-            return "/api/franchise/" + franchise.franchiseId + " " + franchise.Name;
+            return "/api/franchise/" + franchise.getFranchiseId() + " " + franchise.getName();
         }
         else
         {
@@ -57,11 +57,43 @@ public class Movie {
     public List<String> get_character_list(){
         return characters.stream()
                 .map(characterItem -> {
-                    return "/api/character/" + characterItem.characterId + " " + characterItem.fullName;
+                    return "/api/character/" + characterItem.getCharacterId() + " " + characterItem.getFullName();
                 }).collect(Collectors.toList());
     }
 
     @ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
     public List<Character> characters = new ArrayList<>();
 
+    //Getters
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public Integer getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public List<Character> getCharacters() {
+        return characters;
+    }
 }

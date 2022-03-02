@@ -31,7 +31,7 @@ public class Character {
     public List<String> get_movie_list(){
         return movies.stream()
                 .map(movieItem -> {
-                    return "/api/movie/" + movieItem.movieId + " " + movieItem.title;
+                    return "/api/movie/" + movieItem.getMovieId() + " " + movieItem.getTitle();
                 }).collect(Collectors.toList());
     }
 
@@ -43,4 +43,28 @@ public class Character {
     )
     public List<Movie> movies = new ArrayList<>();
 
+    //Getters
+    public int getCharacterId() {
+        return characterId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
 }
