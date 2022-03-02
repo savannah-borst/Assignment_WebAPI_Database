@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/franchise")
 public class FranchiseController {
 
     @Autowired
@@ -18,7 +18,7 @@ public class FranchiseController {
     private MovieRepository movieRepository;
 
     // read all
-    @GetMapping("/franchise/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
         HttpStatus resp = HttpStatus.OK;
@@ -26,14 +26,14 @@ public class FranchiseController {
     }
 
     //create
-    @PostMapping("/franchise")
+    @PostMapping("/create")
     public Franchise createFranchise(@RequestBody Franchise franchise) {
         franchise = franchiseRepository.save(franchise);
         return franchise;
     }
 
     //read
-    @GetMapping("franchise/{id}")
+    @GetMapping("/{id}")
     public Franchise getFranchise(@PathVariable Integer id) {
         Franchise franchise = null;
         if (franchiseRepository.existsById(id)) {
@@ -43,9 +43,9 @@ public class FranchiseController {
     }
 
     // read all movies in the franchise
-    @GetMapping("franchise/{id}/movies")
+    @GetMapping("/{id}/movies")
     public ResponseEntity<List<String>> getMoviesInFranchise(@PathVariable Integer id) {
-        Franchise franchise = getFranchise(id);
+        Franchise franchise = franchiseRepository.findById(id).get();
         List<String> movies = franchise.get_movie_list();
         HttpStatus resp = HttpStatus.OK;
         return new ResponseEntity<>(movies, resp);
@@ -64,7 +64,7 @@ public class FranchiseController {
 //        return new ResponseEntity<>(franchise, resp);
 //    }
 
-    @DeleteMapping("franchise/{id}/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable Integer id) {
         HttpStatus status;
 

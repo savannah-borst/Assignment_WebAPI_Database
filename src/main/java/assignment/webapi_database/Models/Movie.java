@@ -1,6 +1,8 @@
 package assignment.webapi_database.Models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class Movie {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(
             name = "franchise_movies",
-            joinColumns = {@JoinColumn(name = "movie_id")},
+            joinColumns = {@JoinColumn(name = "movie_id", foreignKey = @javax.persistence.ForeignKey(name = "none"))},
             inverseJoinColumns = {@JoinColumn(name = "franchise_id")}
     )
     public Franchise franchise;
@@ -62,6 +64,7 @@ public class Movie {
     }
 
     @ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public List<Character> characters = new ArrayList<>();
 
     //Getters
