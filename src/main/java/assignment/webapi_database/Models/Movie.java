@@ -37,7 +37,7 @@ public class Movie {
     {
         if(franchise != null)
         {
-            return "/franchise/" + franchise.franchiseId;
+            return "/api/franchise/" + franchise.franchiseId + franchise.Name;
         }
         else
         {
@@ -57,7 +57,7 @@ public class Movie {
     public List<String> get_character_list(){
         return characters.stream()
                 .map(characterItem -> {
-                    return "/api/character/" + characterItem.characterId;
+                    return "/api/character/" + characterItem.characterId + characterItem.fullName;
                 }).collect(Collectors.toList());
     }
 

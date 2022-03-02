@@ -20,11 +20,12 @@ public class Franchise {
     @Column
     public String Description;
 
+    //Relationships
     @JsonGetter("movies")
     public List<String> get_movie_list(){
         return movies.stream()
                 .map(movieItem -> {
-                    return "/movie/" + movieItem.movieId;
+                    return "/movie/" + movieItem.movieId + movieItem.title;
                 }).collect(Collectors.toList());
     }
 

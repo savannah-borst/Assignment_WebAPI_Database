@@ -26,11 +26,12 @@ public class Character {
     @Column
     public String picture;
 
+    //Relationships
     @JsonGetter("movies")
     public List<String> get_movie_list(){
         return movies.stream()
                 .map(movieItem -> {
-                    return "/api/movie/" + movieItem.movieId;
+                    return "/api/movie/" + movieItem.movieId + movieItem.title;
                 }).collect(Collectors.toList());
     }
 
