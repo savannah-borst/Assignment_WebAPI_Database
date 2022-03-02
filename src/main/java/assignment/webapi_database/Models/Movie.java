@@ -20,7 +20,7 @@ public class Movie {
     public String genre;
 
     @Column
-    public int releaseYear;
+    public Integer releaseYear;
 
     @Column(length = 60)
     public String director;
@@ -31,6 +31,7 @@ public class Movie {
     @Column
     public String trailer;
 
+    //Relationships
     @JsonGetter("franchise")
     public String getFranchise()
     {
@@ -62,4 +63,5 @@ public class Movie {
 
     @ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
     public List<Character> characters = new ArrayList<>();
+
 }
