@@ -14,7 +14,7 @@ public class Franchise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int franchiseId;
 
-    @Column(length = 60)
+    @Column(length = 60, nullable = false)
     public String Name;
 
     @Column

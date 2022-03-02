@@ -14,13 +14,13 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int characterId;
 
-    @Column(length = 60)
+    @Column(length = 60, nullable = false)
     public String fullName;
 
     @Column(length = 60)
     public String alias;
 
-    @Column(length = 8)
+    @Column(length = 8, nullable = false)
     public String gender;
 
     @Column
