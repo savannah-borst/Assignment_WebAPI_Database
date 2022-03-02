@@ -24,7 +24,7 @@ public class Franchise {
     public List<String> get_movie_list(){
         return movies.stream()
                 .map(movieItem -> {
-                    return "/api/movie/" + movieItem.movieId;
+                    return "/movie/" + movieItem.movieId;
                 }).collect(Collectors.toList());
     }
 
