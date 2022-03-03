@@ -2,11 +2,13 @@ package assignment.webapi_database.Controllers;
 
 import assignment.webapi_database.Models.*;
 import assignment.webapi_database.Repositories.*;
+import assignment.webapi_database.Service.FranchiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ public class FranchiseController {
     @Autowired
     private FranchiseRepository franchiseRepository;
     @Autowired
-    private MovieRepository movieRepository;
+    private FranchiseService franchiseService;
 
     // read all
     @GetMapping("/all")
@@ -58,7 +60,7 @@ public class FranchiseController {
     }
 
     // read all movies in the franchise
-    @GetMapping("/{id}/movies")
+    @GetMapping("/{id}/get/movies")
     public ResponseEntity<List<String>> getMoviesInFranchise(@PathVariable Integer id) {
         Franchise franchise = franchiseRepository.findById(id).get();
         List<String> movies = franchise.get_movie_list();
@@ -66,26 +68,69 @@ public class FranchiseController {
         return new ResponseEntity<>(movies, status);
     }
 
-    //update movie to a franchise
-    @PutMapping("/{id}/update/movie")
-    public ResponseEntity<List<Movie>> updateMovieToFranchise(@RequestBody int[] movieId, @PathVariable Integer id) {
-        Franchise franchise = franchiseRepository.getById(id);
+    // read all character in the franchise
+    @GetMapping("/{id}/get/characters")
+    public ResponseEntity<List<String>> getCharactersInFranchise(@PathVariable Integer id) {
+        Franchise franchise = franchiseRepository.findById(id).get();
+        List<String> characters = new ArrayList<>();
+
         List<Movie> movies = franchise.getMovies();
-        boolean contains;
-        HttpStatus status;
+        //loop through movie list
+        for (int i= 0; i < movies.size(); i++) {
+            //get character list from movie
+            List<String> movChar = movies.get(i).get_character_list();
 
-        if (franchiseRepository.existsById(id)) {
-
-            for (int i: movieId) {
-                contains = movies.stream().anyMatch(movieItem -> movieItem.getMovieId() == i);
-                if (!contains) {
-                    if (movieRepository.existsById(i)) {
-                        Optional<Movie> movieItem = movieRepository.findById(i);
-                        movies.add(movieItem.orElse(null));
-                    }
+            //loop through character list
+            for (int j = 0; j < movChar.size(); j++) {
+                if (!characters.contains(movChar.get(j))){
+                    characters.add(movChar.get(j));
                 }
             }
 
+        }
+
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(characters, status);
+    }
+
+    //update
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Franchise> updateFranchise(@PathVariable Integer id, @RequestBody Franchise franchise) {
+        Franchise returnFranchise = franchiseRepository.findById(id).get();
+        HttpStatus status;
+
+        if(!id.equals(franchise.getFranchiseId())) {
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(returnFranchise, status);
+        }
+
+        if(franchise.getName() != null) {
+            returnFranchise.name = franchise.name;
+        }
+
+        if(franchise.getDescription() != null) {
+            returnFranchise.description = franchise.description;
+        }
+
+        if(franchise.getMovies() != null) {
+            returnFranchise.movies = franchise.movies;
+        }
+
+        returnFranchise = franchiseRepository.save(returnFranchise);
+        status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(returnFranchise, status);
+    }
+
+    //update movie to a franchise
+    @PutMapping("/{id}/update/movie")
+    public ResponseEntity<List<Movie>> updateMovieToFranchise( @PathVariable Integer id, @RequestBody Integer[] movieId) {
+        Franchise franchise = franchiseRepository.getById(id);
+        List<Movie> movies = new ArrayList<>();
+
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(id)) {
+            movies = franchiseService.updateCharInMovie(id, movieId);
             status = HttpStatus.OK;
 
             return new ResponseEntity<>(movies, status);
