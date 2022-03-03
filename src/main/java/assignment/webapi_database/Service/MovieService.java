@@ -28,8 +28,8 @@ public class MovieService {
             contains = actors.stream().anyMatch(character -> character.characterId == id);
             if (!contains) {
                 if (characterRepository.existsById(id)) {
-                    Optional<Character> character = characterRepository.findById(id);
-                    actors.add(character.orElse(null));
+                    Optional<Character> characterRepo = characterRepository.findById(id);
+                    actors.add(characterRepo.orElse(null));
                 }
             }
         }

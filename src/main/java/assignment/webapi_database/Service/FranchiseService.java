@@ -28,8 +28,10 @@ public class FranchiseService {
             contains = movies.stream().anyMatch(movie -> movie.movieId == id);
             if (!contains) {
                 if (movieRepository.existsById(id)) {
-                    Optional<Movie> movieItem = movieRepository.findById(id);
-                    movies.add(movieItem.orElse(null));
+                    Optional<Movie> movieRepo = movieRepository.findById(id);
+                    Movie movie = movieRepo.get();
+                    movie.franchise = franchise;
+                    movies.add(movie);
                 }
             }
         }
