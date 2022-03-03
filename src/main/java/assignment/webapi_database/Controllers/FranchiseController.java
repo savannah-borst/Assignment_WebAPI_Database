@@ -124,7 +124,6 @@ public class FranchiseController {
     //update movie to a franchise
     @PutMapping("/{id}/update/movie")
     public ResponseEntity<List<Movie>> updateMovieToFranchise( @PathVariable Integer id, @RequestBody Integer[] movieId) {
-        Franchise franchise = franchiseRepository.getById(id);
         List<Movie> movies = new ArrayList<>();
 
         HttpStatus status;

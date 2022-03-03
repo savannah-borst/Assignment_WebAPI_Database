@@ -134,7 +134,6 @@ public class MovieController {
     //Credits to Iljaas and Richie for stream api https://github.com/iljaasdhonre/Assignment_3_WebApiAndDatabase/blob/master/src/main/java/com/richieandmod/assignment_3_webapianddatabase/Services/MovieServiceImpl.java
     @PutMapping("/{id}/update/character")
     public ResponseEntity<List<Character>> updateCharacterInMovie(@PathVariable Integer id, @RequestBody Integer[] charId)  {
-        Movie movie = movieRepository.getById(id);
         List<Character> actors = new ArrayList<>();
         HttpStatus status;
 
