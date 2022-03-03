@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/franchise")
@@ -15,31 +16,45 @@ public class FranchiseController {
 
     @Autowired
     private FranchiseRepository franchiseRepository;
+    @Autowired
     private MovieRepository movieRepository;
 
     // read all
     @GetMapping("/all")
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
-        HttpStatus resp = HttpStatus.OK;
-        return new ResponseEntity<>(franchises, resp);
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(franchises, status);
     }
 
     //create
     @PostMapping("/create")
-    public Franchise createFranchise(@RequestBody Franchise franchise) {
-        franchise = franchiseRepository.save(franchise);
-        return franchise;
+    public ResponseEntity<Franchise> createFranchise(@RequestBody Franchise franchise) {
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(franchise.franchiseId)) {
+            status = HttpStatus.BAD_REQUEST;
+        }  else {
+            franchise = franchiseRepository.save(franchise);
+            status = HttpStatus.OK;
+        }
+
+        return new ResponseEntity<>(franchise, status);
     }
 
     //read
     @GetMapping("/{id}")
-    public Franchise getFranchise(@PathVariable Integer id) {
+    public ResponseEntity<Franchise> getFranchise(@PathVariable Integer id) {
         Franchise franchise = null;
+        HttpStatus status;
+
         if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
             franchise = franchiseRepository.findById(id).get();
+        } else {
+            status = HttpStatus.NOT_FOUND;
         }
-        return franchise;
+        return new ResponseEntity<>(franchise, status);
     }
 
     // read all movies in the franchise
@@ -47,22 +62,39 @@ public class FranchiseController {
     public ResponseEntity<List<String>> getMoviesInFranchise(@PathVariable Integer id) {
         Franchise franchise = franchiseRepository.findById(id).get();
         List<String> movies = franchise.get_movie_list();
-        HttpStatus resp = HttpStatus.OK;
-        return new ResponseEntity<>(movies, resp);
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(movies, status);
     }
 
-    //add movie to a franchise
-//    @PutMapping("franchise/{id}/movie/{movie_id]")
-//    public ResponseEntity<Franchise> addMovieToFranchise(@RequestBody Movie movie, @PathVariable Integer id, Integer movie_id) {
-//        Franchise franchise = getFranchise(id);
-//        if (movieRepository.existsById(movie_id)) {
-//            franchise.movies.add(movieRepository.getById(movie_id));
-//        }
-//        franchise = franchiseRepository.save(franchise);
-//
-//        HttpStatus resp = HttpStatus.OK;
-//        return new ResponseEntity<>(franchise, resp);
-//    }
+    //update movie to a franchise
+    @PutMapping("/{id}/update/movie")
+    public ResponseEntity<List<Movie>> updateMovieToFranchise(@RequestBody int[] movieId, @PathVariable Integer id) {
+        Franchise franchise = franchiseRepository.getById(id);
+        List<Movie> movies = franchise.getMovies();
+        boolean contains;
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(id)) {
+
+            for (int i: movieId) {
+                contains = movies.stream().anyMatch(movieItem -> movieItem.getMovieId() == i);
+                if (!contains) {
+                    if (movieRepository.existsById(i)) {
+                        Optional<Movie> movieItem = movieRepository.findById(i);
+                        movies.add(movieItem.orElse(null));
+                    }
+                }
+            }
+
+            status = HttpStatus.OK;
+
+            return new ResponseEntity<>(movies, status);
+
+        } else {
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(movies, status);
+        }
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable Integer id) {
