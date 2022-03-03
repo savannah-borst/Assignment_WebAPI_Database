@@ -47,6 +47,7 @@ public class Movie {
         }
     }
 
+    //relation with franchise
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(
             name = "franchise_movies",
@@ -55,6 +56,7 @@ public class Movie {
     )
     public Franchise franchise;
 
+    //relation with characters
     @JsonGetter("characters")
     public List<String> get_character_list(){
         return characters.stream()
@@ -63,7 +65,12 @@ public class Movie {
                 }).collect(Collectors.toList());
     }
 
-    @ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "movie_characters",
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "character_id")}
+    )
     @OnDelete(action = OnDeleteAction.CASCADE)
     public List<Character> characters = new ArrayList<>();
 
