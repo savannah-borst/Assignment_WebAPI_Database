@@ -3,6 +3,7 @@ package assignment.webapi_database.Controllers;
 import assignment.webapi_database.Models.Character;
 import assignment.webapi_database.Models.Movie;
 import assignment.webapi_database.Repositories.CharacterRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,14 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/character")
 public class CharacterController {
 
     @Autowired
     private CharacterRepository characterRepository;
 
     //create
+    @Operation(summary= "Create a character")
     @PostMapping("/create")
     public ResponseEntity<Character> createCharacter(@RequestBody Character character) {
         HttpStatus status;
@@ -34,6 +36,7 @@ public class CharacterController {
     }
 
     //read
+    @Operation(summary= "Get a character")
     @GetMapping("/{id}")
     public ResponseEntity<Character> getCharacter (@PathVariable Integer id) {
         Character character = new Character();
@@ -50,6 +53,7 @@ public class CharacterController {
     }
 
     //get all
+    @Operation(summary= "Get all character")
     @GetMapping("/all")
     public ResponseEntity<List<Character>> getAllCharacters() {
         List<Character> character = characterRepository.findAll();
@@ -58,6 +62,7 @@ public class CharacterController {
     }
 
     //delete
+    @Operation(summary= "Delete a character")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Character> deleteCharacter(@PathVariable Integer id) {
         HttpStatus status;
@@ -71,6 +76,7 @@ public class CharacterController {
     }
 
     //update
+    @Operation(summary= "Update a character")
     @PutMapping("update/{id}")
     public ResponseEntity<Character> updateCharacter(@PathVariable Integer id, @RequestBody Character character) {
         Character returnCharacter = characterRepository.findById(id).get();

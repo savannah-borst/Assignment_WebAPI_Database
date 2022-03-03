@@ -18,6 +18,7 @@ public class MovieService {
     @Autowired
     private CharacterRepository characterRepository;
 
+    //Credits to Iljaas and Richie for stream api https://github.com/iljaasdhonre/Assignment_3_WebApiAndDatabase/blob/master/src/main/java/com/richieandmod/assignment_3_webapianddatabase/Services/MovieServiceImpl.java
     public List<Character> updateCharInMovie(Integer movieId, Integer[] charId)  {
         Optional<Movie> repoMovie = movieRepository.findById(movieId);
         Movie movie = repoMovie.orElseThrow();
