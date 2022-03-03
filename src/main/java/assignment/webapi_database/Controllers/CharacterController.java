@@ -14,7 +14,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/character")
 public class CharacterController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class CharacterController {
     }
 
     //read
-    @Operation(summary= "Read a character")
+    @Operation(summary= "Get a character")
     @GetMapping("/{id}")
     public ResponseEntity<Character> getCharacter (@PathVariable Integer id) {
         Character character = new Character();
