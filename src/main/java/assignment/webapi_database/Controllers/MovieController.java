@@ -5,6 +5,7 @@ import assignment.webapi_database.Models.Movie;
 import assignment.webapi_database.Repositories.CharacterRepository;
 import assignment.webapi_database.Repositories.MovieRepository;
 import assignment.webapi_database.Service.MovieService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class MovieController {
     private MovieService movieService;
 
     //create
+    @Operation(summary = "Create a movie")
     @PostMapping("/create")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
         HttpStatus status;
@@ -35,6 +37,7 @@ public class MovieController {
     }
 
     //read
+    @Operation(summary = "Get movie by id")
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovie (@PathVariable Integer id) {
         Movie movie = new Movie();
@@ -51,6 +54,7 @@ public class MovieController {
     }
 
     //get all
+    @Operation(summary = "Get all movies")
     @GetMapping("/all")
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
@@ -59,6 +63,7 @@ public class MovieController {
     }
 
     //Get Characters in movie
+    @Operation(summary = "Get characters within a movie")
     @GetMapping("/{id}/get/characters")
     public ResponseEntity<List<String>> getCharacterInMovie(@PathVariable Integer id) {
         Movie movie  = movieRepository.findById(id).get();
@@ -69,6 +74,7 @@ public class MovieController {
     }
 
     //update
+    @Operation(summary = "Update a movie")
     @PutMapping("/update/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
         Movie returnMovie = movieRepository.findById(id).get();
@@ -117,6 +123,7 @@ public class MovieController {
     }
 
     //delete
+    @Operation(summary = "Delete a movie")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Movie> deleteMovie(@PathVariable Integer id) {
         HttpStatus status;
@@ -131,7 +138,7 @@ public class MovieController {
     }
 
     //update characters in movies
-    //Credits to Iljaas and Richie for stream api https://github.com/iljaasdhonre/Assignment_3_WebApiAndDatabase/blob/master/src/main/java/com/richieandmod/assignment_3_webapianddatabase/Services/MovieServiceImpl.java
+        @Operation(summary = "Update character in movies")
     @PutMapping("/{id}/update/character")
     public ResponseEntity<List<Character>> updateCharacterInMovie(@PathVariable Integer id, @RequestBody Integer[] charId)  {
         List<Character> actors = new ArrayList<>();

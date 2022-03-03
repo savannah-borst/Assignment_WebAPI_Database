@@ -18,6 +18,7 @@ public class FranchiseService {
     @Autowired
     private MovieRepository movieRepository;
 
+    //Credits to Iljaas and Richie for stream api https://github.com/iljaasdhonre/Assignment_3_WebApiAndDatabase/blob/master/src/main/java/com/richieandmod/assignment_3_webapianddatabase/Services/MovieServiceImpl.java
     public List<Movie> updateCharInMovie(Integer franchiseId, Integer[] movieId)  {
         Optional<Franchise> repoFran = franchiseRepository.findById(franchiseId);
         Franchise franchise = repoFran.orElseThrow();
