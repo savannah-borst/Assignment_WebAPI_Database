@@ -17,16 +17,16 @@ public class Character {
     public int characterId;
 
     @NotBlank
-    @Size(max = 255)
+    @Size(max = 60)
     @Column(length = 60, nullable = false)
     public String fullName;
 
-    @Size(max = 255)
+    @Size(max = 60)
     @Column(length = 60)
     public String alias;
 
     @NotBlank
-    @Size(max = 255)
+    @Size(max = 8)
     @Column(length = 8, nullable = false)
     public String gender;
 
