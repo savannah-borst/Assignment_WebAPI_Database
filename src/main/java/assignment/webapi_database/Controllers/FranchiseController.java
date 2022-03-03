@@ -3,6 +3,7 @@ package assignment.webapi_database.Controllers;
 import assignment.webapi_database.Models.*;
 import assignment.webapi_database.Repositories.*;
 import assignment.webapi_database.Service.FranchiseService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ public class FranchiseController {
     private FranchiseService franchiseService;
 
     // read all
+    @Operation(summary = "Get all the franchises")
     @GetMapping("/all")
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
@@ -30,6 +32,7 @@ public class FranchiseController {
     }
 
     //create
+    @Operation(summary = "Create a franchise")
     @PostMapping("/create")
     public ResponseEntity<Franchise> createFranchise(@RequestBody Franchise franchise) {
         HttpStatus status;
@@ -45,6 +48,7 @@ public class FranchiseController {
     }
 
     //read
+    @Operation(summary = "Get a franchise by Id")
     @GetMapping("/{id}")
     public ResponseEntity<Franchise> getFranchise(@PathVariable Integer id) {
         Franchise franchise = null;
@@ -60,6 +64,7 @@ public class FranchiseController {
     }
 
     // read all movies in the franchise
+    @Operation(summary = "Get all the movies in a franchise")
     @GetMapping("/{id}/get/movies")
     public ResponseEntity<List<String>> getMoviesInFranchise(@PathVariable Integer id) {
         Franchise franchise = franchiseRepository.findById(id).get();
@@ -69,6 +74,7 @@ public class FranchiseController {
     }
 
     // read all character in the franchise
+    @Operation(summary = "Get all the characters in a franchise")
     @GetMapping("/{id}/get/characters")
     public ResponseEntity<List<String>> getCharactersInFranchise(@PathVariable Integer id) {
         Franchise franchise = franchiseRepository.findById(id).get();
@@ -94,6 +100,7 @@ public class FranchiseController {
     }
 
     //update
+    @Operation(summary = "Update data of a franchise")
     @PutMapping("/update/{id}")
     public ResponseEntity<Franchise> updateFranchise(@PathVariable Integer id, @RequestBody Franchise franchise) {
         Franchise returnFranchise = franchiseRepository.findById(id).get();
@@ -122,6 +129,7 @@ public class FranchiseController {
     }
 
     //update movie to a franchise
+    @Operation(summary = "Update a movie of a franchise")
     @PutMapping("/{id}/update/movie")
     public ResponseEntity<List<Movie>> updateMovieToFranchise( @PathVariable Integer id, @RequestBody Integer[] movieId) {
         List<Movie> movies = new ArrayList<>();
@@ -140,6 +148,7 @@ public class FranchiseController {
         }
     }
 
+    @Operation(summary = "Delete a franchise")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Franchise> deleteFranchise(@PathVariable Integer id) {
         HttpStatus status;
