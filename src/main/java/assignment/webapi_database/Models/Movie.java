@@ -99,4 +99,41 @@ public class Movie {
     public List<Character> getCharacters() {
         return characters;
     }
+
+    //Setters
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    }
 }
