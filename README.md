@@ -5,7 +5,7 @@ For the assignment it was necessary for the application to be constructed in Spr
 
 ## How To Use
 
-###List of API Endpoints
+####List of API Endpoints
 - Create a franchise
 - Create a movie
 - Create a character
@@ -40,7 +40,7 @@ Run the program and open the following in the browser:
 ### Running through Heroku
 
 
-###To create:
+####To create:
 
 Click the appropriate information you want to create and click try it out:
 - remove the id from the response body as this will be auto incremented.
@@ -48,14 +48,14 @@ Click the appropriate information you want to create and click try it out:
 - Add the information you want to add. 
 - click execute
 
-###To read:
+####To read:
 
 Click the appropriate information you want to read and click try it out:
 - With get all just click execute
 - with get by id give an id number for the information you want to get.
 - click execute
 
-###To update:
+####To update:
 
 Click the appropriate information you want to update and click try it out:
 - remove the relations from the response body.
@@ -64,13 +64,13 @@ Click the appropriate information you want to update and click try it out:
 - give the information you want to update
 - click execute
 
-###To update relations
+####To update relations
 Click the appropriate information you want to update and click try it out:
 - give the id number of the information you want to change.
 - pass in the body the id's of the information(relation) you want to add
 - click execute
 
-###To delete:
+####To delete:
 
 Click the appropriate information you want to delete and click try it out:
 - give the id of the information you want to delete.
