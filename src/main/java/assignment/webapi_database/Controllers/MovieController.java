@@ -21,8 +21,6 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
-    private CharacterRepository characterRepository;
-    @Autowired
     private MovieService movieService;
 
     //create
