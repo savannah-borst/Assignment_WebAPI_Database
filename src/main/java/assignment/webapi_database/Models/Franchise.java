@@ -5,6 +5,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,9 +18,12 @@ public class Franchise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int franchiseId;
 
+    @NotBlank
+    @Size(max = 60)
     @Column(length = 60, nullable = false)
     public String name;
 
+    @Size(max = 255)
     @Column
     public String description;
 
@@ -33,7 +38,7 @@ public class Franchise {
 
     @OneToMany(mappedBy = "franchise", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    public List<Movie> movies = new ArrayList<>();
+    public List<Movie> movies = this.getMovies();
 
     //getters
     public int getFranchiseId() {

@@ -63,7 +63,7 @@ public class Movie {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(
             name = "franchise_movies",
-            joinColumns = {@JoinColumn(name = "movie_id", foreignKey = @javax.persistence.ForeignKey(name = "none"))},
+            joinColumns = {@JoinColumn(name = "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "franchise_id")}
     )
     public Franchise franchise;
