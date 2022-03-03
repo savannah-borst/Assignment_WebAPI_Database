@@ -4,11 +4,13 @@ import assignment.webapi_database.Models.Character;
 import assignment.webapi_database.Models.Movie;
 import assignment.webapi_database.Repositories.CharacterRepository;
 import assignment.webapi_database.Repositories.MovieRepository;
+import assignment.webapi_database.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +21,7 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
-    private CharacterRepository characterRepository;
+    private MovieService movieService;
 
     //create
     @PostMapping("/create")
@@ -57,7 +59,7 @@ public class MovieController {
     }
 
     //Get Characters in movie
-    @GetMapping("/{id}/characters")
+    @GetMapping("/{id}/get/characters")
     public ResponseEntity<List<String>> getCharacterInMovie(@PathVariable Integer id) {
         Movie movie  = movieRepository.findById(id).get();
         List<String> listCharacters = movie.get_character_list();
@@ -131,34 +133,19 @@ public class MovieController {
     //update characters in movies
     //Credits to Iljaas and Richie for stream api https://github.com/iljaasdhonre/Assignment_3_WebApiAndDatabase/blob/master/src/main/java/com/richieandmod/assignment_3_webapianddatabase/Services/MovieServiceImpl.java
     @PutMapping("/{id}/update/character")
-    public ResponseEntity<Movie> updateCharacterInMovie(@PathVariable Integer id, @RequestBody int[] charId)  {
-        Movie movie = movieRepository.getById(id);
-        List<Character> actors = movie.getCharacters();
-        boolean contains;
+    public ResponseEntity<List<Character>> updateCharacterInMovie(@PathVariable Integer id, @RequestBody Integer[] charId)  {
+        List<Character> actors = new ArrayList<>();
         HttpStatus status;
 
         if (movieRepository.existsById(id)) {
-
-            for (int i: charId) {
-                contains = actors.stream().anyMatch(character -> character.getCharacterId() == i);
-                if (!contains) {
-                    if (characterRepository.existsById(i)) {
-                        Optional<Character> character = characterRepository.findById(i);
-                        actors.add(character.orElse(null));
-                    }
-                }
-            }
-
-            movie.setCharacters(actors);
-            movieRepository.save(movie);
-
+            actors = movieService.updateCharInMovie(id, charId);
             status = HttpStatus.OK;
 
-            return new ResponseEntity<>(movie, status);
+            return new ResponseEntity<>(actors, status);
 
         } else {
             status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(movie, status);
+            return new ResponseEntity<>(actors, status);
         }
     }
 

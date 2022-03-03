@@ -33,9 +33,8 @@ public class Character {
     @Size(max = 255)
     @Column
     public String picture;
-    public boolean title;
 
-    //Relationships
+    //Relation with movies
     @JsonGetter("movies")
     public List<String> get_movie_list(){
         return movies.stream()

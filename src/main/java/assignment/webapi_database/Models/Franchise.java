@@ -51,4 +51,21 @@ public class Franchise {
     public List<Movie> getMovies() {
         return movies;
     }
+
+    //Setters
+    public void setFranchiseId(int franchiseId) {
+        this.franchiseId = franchiseId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 }
