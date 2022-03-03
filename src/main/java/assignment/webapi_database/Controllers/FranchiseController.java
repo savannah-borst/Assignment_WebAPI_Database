@@ -23,25 +23,38 @@ public class FranchiseController {
     @GetMapping("/all")
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
-        HttpStatus resp = HttpStatus.OK;
-        return new ResponseEntity<>(franchises, resp);
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(franchises, status);
     }
 
     //create
     @PostMapping("/create")
-    public Franchise createFranchise(@RequestBody Franchise franchise) {
-        franchise = franchiseRepository.save(franchise);
-        return franchise;
+    public ResponseEntity<Franchise> createFranchise(@RequestBody Franchise franchise) {
+        HttpStatus status;
+
+        if (franchiseRepository.existsById(franchise.franchiseId)) {
+            status = HttpStatus.BAD_REQUEST;
+        }  else {
+            franchise = franchiseRepository.save(franchise);
+            status = HttpStatus.OK;
+        }
+
+        return new ResponseEntity<>(franchise, status);
     }
 
     //read
     @GetMapping("/{id}")
-    public Franchise getFranchise(@PathVariable Integer id) {
+    public ResponseEntity<Franchise> getFranchise(@PathVariable Integer id) {
         Franchise franchise = null;
+        HttpStatus status;
+
         if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
             franchise = franchiseRepository.findById(id).get();
+        } else {
+            status = HttpStatus.NOT_FOUND;
         }
-        return franchise;
+        return new ResponseEntity<>(franchise, status);
     }
 
     // read all movies in the franchise
@@ -49,8 +62,8 @@ public class FranchiseController {
     public ResponseEntity<List<String>> getMoviesInFranchise(@PathVariable Integer id) {
         Franchise franchise = franchiseRepository.findById(id).get();
         List<String> movies = franchise.get_movie_list();
-        HttpStatus resp = HttpStatus.OK;
-        return new ResponseEntity<>(movies, resp);
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(movies, status);
     }
 
     //update movie to a franchise
