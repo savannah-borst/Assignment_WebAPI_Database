@@ -3,6 +3,8 @@ package assignment.webapi_database.Models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,15 +16,21 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int characterId;
 
+    @NotBlank
+    @Size(max = 255)
     @Column(length = 60, nullable = false)
     public String fullName;
 
+    @Size(max = 255)
     @Column(length = 60)
     public String alias;
 
+    @NotBlank
+    @Size(max = 255)
     @Column(length = 8, nullable = false)
     public String gender;
 
+    @Size(max = 255)
     @Column
     public String picture;
     public boolean title;
@@ -45,9 +53,7 @@ public class Character {
     public List<Movie> movies = new ArrayList<>();
 
     //Getters
-    public int getCharacterId() {
-        return characterId;
-    }
+    public int getCharacterId() {return characterId;}
 
     public String getFullName() {
         return fullName;
