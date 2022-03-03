@@ -19,7 +19,8 @@ public class MovieService {
     private CharacterRepository characterRepository;
 
     public List<Character> updateCharInMovie(Integer movieId, Integer[] charId)  {
-        Movie movie = movieRepository.getById(movieId);
+        Optional<Movie> repoMovie = movieRepository.findById(movieId);
+        Movie movie = repoMovie.orElseThrow();
         List<Character> actors = movie.getCharacters();
         boolean contains;
 
