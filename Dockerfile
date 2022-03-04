@@ -21,10 +21,7 @@ ENTRYPOINT ["java", "-jar", \
     "-Dspring.profiles.active=${SPRING_PROFILE}", \
     "-Dspring.datasource.url=jdbc:${DATABASE_URL}", \
     "-Dspring.jpa.hibernate.ddl-auto=${DDL_AUTO}", \
-    "-Dspring.security.oauth2.resourceserver.jwt.issuer-uri=${ISSUER_URL}", \
-    "-Dspring.security.oauth2.resourceserver.jwt.jwk-set-uri=${JWKS_URI}", \
     "-Dspringdoc.swagger-ui.oauth.client-id=${CLIENT_ID}", \
     "-Dspringdoc.swagger-ui.oauth.client-secret=${CLIENT_SECRET}", \
-    "-Dapp.cors.application_origin=${APP_ORIGIN}", \
     "app.jar" \
 ]
