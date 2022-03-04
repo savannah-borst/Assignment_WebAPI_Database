@@ -1,4 +1,5 @@
 # Assignment 3: Java Web API Creation With Hibernate
+[![web](https://img.shields.io/static/v1?logo=heroku&message=Online&label=Heroku&color=430098)](https://assignment-webapi-database.herokuapp.com/swagger-ui/index.html)
 
 ## Assignment
 For the assignment it was necessary for the application to be constructed in Spring Web. It should comprise of a database made in PostgreSQL through Hibernate with a RESTful API with all the CRUD functions and more. The database will store information about characters, movies, and franchises. Also give relations to the franchise and movies and movies and characters. We chose Star Wars as our reference material.
@@ -40,7 +41,7 @@ Run the program and open the following in the browser:
 ### Running through Heroku
 
 
-####To create:
+###To create:
 
 Click the appropriate information you want to create and click try it out:
 - remove the id from the response body as this will be auto incremented.
@@ -48,14 +49,14 @@ Click the appropriate information you want to create and click try it out:
 - Add the information you want to add. 
 - click execute
 
-####To read:
+###To read:
 
 Click the appropriate information you want to read and click try it out:
 - With get all just click execute
 - with get by id give an id number for the information you want to get.
 - click execute
 
-####To update:
+###To update:
 
 Click the appropriate information you want to update and click try it out:
 - remove the relations from the response body.
@@ -64,13 +65,13 @@ Click the appropriate information you want to update and click try it out:
 - give the information you want to update
 - click execute
 
-####To update relations
+###To update relations
 Click the appropriate information you want to update and click try it out:
 - give the id number of the information you want to change.
 - pass in the body the id's of the information(relation) you want to add
 - click execute
 
-####To delete:
+###To delete:
 
 Click the appropriate information you want to delete and click try it out:
 - give the id of the information you want to delete.
