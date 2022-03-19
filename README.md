@@ -1,6 +1,6 @@
 
 # Noroff Bootcamp Assignment 3: Create a Web API and database with Spring.
-[![web](https://img.shields.io/static/v1?logo=heroku&message=Online&label=Heroku&color=430098)](https://assignment-webapi-database.herokuapp.com/swagger-ui/index.html#/)
+[![web](https://img.shields.io/static/v1?logo=heroku&message=Online&label=Heroku&color=430098)](https://whispering-plains-78258.herokuapp.com/)
 ## Assignment
 For the assignment it was necessary for the application to be constructed in Spring Web. It should comprise of a database made in PostgreSQL through Hibernate with a RESTful API with all the CRUD functions and more. The database will store information about characters, movies, and franchises. Also give relations to the franchise and movies and movies and characters. We chose Star Wars as our reference material.
 
